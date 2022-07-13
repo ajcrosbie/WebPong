@@ -194,7 +194,7 @@ function checkReset(){
     var temp = window.getComputedStyle(document.querySelector(".gameArea")).width;
     var gameWidth = Math.floor(Number(temp.slice(0, temp.length-2)));
 
-    if (ballLeft>gameWidth-ballWidth*2.5){
+    if (ballLeft>gameWidth-ballWidth*3){
         increasePoints("player 1");
         console.log("here 1");
         resetGame();
@@ -233,8 +233,8 @@ function changeTime(decreaseRate){
 }
 function checkDone(){
     c = document.querySelector(".timer");
+    console.log(c.textContent);
     if(c.textContent == "0"){
-        console.log(c.textContent);
         alert("game has finished");}
 }
 
@@ -254,7 +254,8 @@ function main(startTime){
         for (i=0; i<startTime; i++){
         
     setTimeout(x, i*1000/y);
-}
+    setTimeout(checkDone, i*1000/y)
+    }
 }
 function running(){
     // // console.log(i);
