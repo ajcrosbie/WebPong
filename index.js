@@ -222,20 +222,39 @@ function moveBall(ballSpeed, ballDirection){
     document.querySelector(".ball").style.top = String(top) + "px";
     // alert(window.getComputedStyle(document.querySelector(".ball")).left);
 }// testingStuff();
-// function changeTime(timeLeft){
-//     // console.log(timeLeft);
-//     c = document.querySelector(".timer");
-//     c.textContent = timeLeft;
-// }
+function setTimer(startTime){
+    c = document.querySelector(".timer");
+    c.textContent = startTime;
+    console.log(startTime);
+}
+function changeTime(decreaseRate){
+    c = document.querySelector(".timer");
+    c.textContent = Number(c.textContent)-decreaseRate;
+}
+function checkDone(){
+    c = document.querySelector(".timer");
+    if(c.textContent == "0"){
+        console.log(c.textContent);
+        alert("game has finished");}
+}
 
 
-function main(){
-    var x = 10000;
-    for(var i=0; i<10000; i++){
-
+function main(startTime){
+    var startTime = 10000;
+    var y = 120;
+    setTimer(startTime*y);
+    for(var i=0; i<startTime; i++){
         // let c = function(i){running(i)}
-        setTimeout(running, i*1000/120);
+        setTimeout(running, i*1000/y);
     }
+    let c = function(decreaseRate){return function(){changeTime(decreaseRate)};}
+    console.log(c);
+    let x = c(y);
+    console.log(x);
+        for (i=0; i<startTime; i++){
+        
+    setTimeout(x, i*1000/y);
+}
 }
 function running(){
     // // console.log(i);
@@ -252,6 +271,7 @@ function running(){
     bounceWall();
     paddleArea();
     checkReset();
+    checkDone();
     // console.log(window.upHeld);
     // console.log(window.downHeld);
     // console.log(window.wHeld);
@@ -302,4 +322,4 @@ document.addEventListener("keyup", (event) => {
     }
 });
 intPaddles();
-main();
+main(10000);
