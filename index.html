@@ -10,15 +10,16 @@
         <div class="topSection">
         <div class="leftPerson">
             <div class="leftText"><span>player 1 has scored</span></div>
-            <div class="leftScore">0</div>
+            <div class="leftScore"><span>0</span></div>
         </div>
         <div class="rightPerson">
-            <div class=rightText"><span>player 2 has scored</span></div>
-            <div class="rightScore">0</div>
+            <div class="rightText"><span>player 2 has scored</span></div>
+            <div class="rightScore"><span>0</span></div>
         </div>
         <div class="timeSection">
             <span class="timer"></span>
         </div>
+		<div class="winner"><span></span></div>
         </div>
 
         <div class="gameArea">
@@ -28,6 +29,47 @@
         </div>
 
         <br>
+		<div class="settingsArea">
+			<form class="form">
+				<table>
+					<tr>
+						<td><span>player 1's name</span></td>
+						<td><input type="text" class="p1Name"/></td>
+						<td><span>player1's paddle colour:</span></td>
+						<td> <span style="color:Crimson">red</span></td>
+						<td><input type="radio" name="p1Colour" value="red" class="p1Colour"></td>
+						<td> <span style="color:CornflowerBlue">blue</span></td>
+						<td><input type="radio" name="p1Colour" value="blue" class="p1Colour"></td>
+						<td> <span style="color:Chartreuse">green</span></td>
+						<td><input type="radio" name="p1Colour" value="green" class="p1Colour"></td>
+						<td> <span style="color:white">white</span></td>
+						<td><input type="radio" name="p1Colour" value="white" class="p1Colour"></td>
+						<td/><td/>
+						<td> player 1 uses w and s to move their paddle</td>
+					</tr>
+					<tr class="player2Data">
+						<td><span>player 2's name</span></td>
+						<td><input type="text" class="p2Name"/></td>
+						<td><span>player2's paddle colour:</span></td>
+						<td> <span style="color:Crimson">red</span></td>
+						<td><input type="radio" name="p2Colour" value="red" class="p2Colour"></td>
+						<td> <span style="color:CornflowerBlue">blue</span></td>
+						<td><input type="radio" name="p2Colour" value="blue" class="p2Colour"></td>
+						<td> <span style="color:Chartreuse">green</span></td>
+						<td><input type="radio" name="p2Colour" value="green" class="p2Colour"></td>
+						<td> <span style="color:white">white</span></td>
+						<td><input type="radio" name="p2Colour" value="white" class="p2Colour"></td>
+						<td/><td/>
+						<td> player 2 uses up and down to move their paddle</td>
+					</tr>
+					<tr>
+						<td><span>how many seconds?</span></td>
+						<td><input type="number" min="0" step="1" class="time"/></td>
+					</tr>
+				</table>
+			<input type="submit">
+			</form>
+		</div>
         <!-- <img src="https://i.imgur.com/UYJIm2E.jpg"> -->
         <script src="index.js"></script>
     </body>

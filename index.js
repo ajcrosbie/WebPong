@@ -84,6 +84,7 @@ function bounceWall(){
 }
 
 
+
 function increasePoints(scorer){
     if (scorer == "player 1"){
         var c = document.querySelector(".leftScore").textContent;
@@ -95,6 +96,7 @@ function increasePoints(scorer){
         document.querySelector(".rightScore").textContent = String(c);
     }
 }
+
 function intPaddles(){
     var temp = window.getComputedStyle(document.querySelector("#rightPaddle")).width;
     var paddleWidth = Math.floor(Number(temp.slice(0, temp.length-2)));
@@ -107,13 +109,14 @@ function intPaddles(){
     // temp = Math.floor(temp);
     temp = Math.floor(temp);
     document.querySelector("#rightPaddle").style.left = temp + "px";
-    console.log(temp)
+    // console.log(temp)
 
     temp = window.getComputedStyle(document.querySelector("#leftPaddle")).left;
     temp = Number(temp.slice(0, top.length-2));
     temp = Math.floor(temp);
     document.querySelector("#leftPaddle").style.left = temp + "px";
 }
+
 function resetGame(){
     document.getElementById("leftPaddle").style.top = window.paddleStart;
     document.getElementById("rightPaddle").style.top = window.paddleStart;
@@ -122,12 +125,19 @@ function resetGame(){
     window.ballDirection = 0;
 }
 
+function playSound(audio){
+	var audio = new Audio("Recording.m4a");
+	return audio;
+}
+
 function bouncePaddle(ballSpeed, ballDirection, paddleSpeed){
     ballSpeed = ballSpeed*-1;
     ballDirection = ballDirection+paddleSpeed;
     window.ballSpeed = ballSpeed;
     window.ballDirection = ballDirection+paddleSpeed;
+    window.audio.play();
 }
+
 function checkPaddle(paddle){
     var ball = document.querySelector(".ball");
     var temp = window.getComputedStyle(ball).left;
@@ -183,6 +193,7 @@ function checkPaddle(paddle){
         return "none";
     }
 }
+
 function checkReset(){
     var ball = document.querySelector(".ball");
     var temp = window.getComputedStyle(ball).left;
@@ -205,6 +216,7 @@ function checkReset(){
         resetGame();
     }
 }
+
 function moveBall(ballSpeed, ballDirection){
     // alert(ballSpeed + ballDirection);
     // alert(window.getComputedStyle(document.querySelector(".ball")).left);
@@ -222,44 +234,115 @@ function moveBall(ballSpeed, ballDirection){
     document.querySelector(".ball").style.top = String(top) + "px";
     // alert(window.getComputedStyle(document.querySelector(".ball")).left);
 }// testingStuff();
+
 function setTimer(startTime){
     c = document.querySelector(".timer");
     c.textContent = startTime;
+	console.log(c.textContent);
     console.log(startTime);
 }
+
 function changeTime(decreaseRate){
     c = document.querySelector(".timer");
     c.textContent = Number(c.textContent)-decreaseRate;
 }
+
 function checkDone(){
     c = document.querySelector(".timer");
-    console.log(c.textContent);
-    if(c.textContent == "0"){
-        alert("game has finished");}
+    //console.log(c.textContent);
+    if(Number(c.textContent) <= 0){
+		c.style.visibility = "Hidden";
+		document.querySelector(".winner").style.visibility = "visible";
+		var p1Score = Number(document.querySelector(".leftScore").textContent);
+		var p2Score = Number(document.querySelector(".rightScore").textContent);
+		if (p1Score>p2Score){
+			document.querySelector(".winner").textContent = document.querySelector(".p1Name").value + " wins by " + String(p1Score-p2Score);
+		}
+		if (p1Score<p2Score){
+			document.querySelector(".winner").textContent = document.querySelector(".p2Name").value + " wins by" + String(p2Score-p1Score);
+		}
+		if(p1Score == p2Score){
+			document.querySelector(".winner").textContent = "you draw";
+		}
+	}else{
+		c.style.visibility = "visible";
+		document.querySelector(".winner").style.visibility = "Hidden";
+	}
+	
 }
 
-
+function setup(){
+	console.log("here");
+	var name = document.querySelector(".p1Name").value;
+	if (!(name=="")){
+		document.querySelector(".leftText").textContent = name+" has scored";
+	}
+	var name = document.querySelector(".p2Name").value;
+	if (!(name=="")){
+		document.querySelector(".rightText").textContent = name+" has scored";
+	}
+	var colour = document.querySelectorAll(".p1Colour");
+	for (var i=0;i<colour.length; i++){
+		if(colour[i].checked){
+			if(colour[i].value == "red"){var p1C = "Crimson"}
+			if(colour[i].value == "green"){var p1C = "Chartreuse"}
+			if(colour[i].value == "blue"){var p1C = "CornflowerBlue"}
+			if(colour[i].value == "white"){var p1C = "white"}
+		}
+	}
+	var colour = document.querySelectorAll(".p2Colour");
+	for (var i=0;i<colour.length; i++){
+		if(colour[i].checked){
+			if(colour[i].value == "red"){p2C = "Crimson"}
+			if(colour[i].value == "green"){p2C = "Chartreuse"}
+			if(colour[i].value == "blue"){p2C = "CornflowerBlue"}
+			if(colour[i].value == "white"){var p1C = "white"}
+		}
+	}
+	document.querySelector("#leftPaddle").style.backgroundColor = p1C;
+	document.querySelector("#rightPaddle").style.backgroundColor = p2C;
+	
+	var num = document.querySelector(".time").value*1000;
+	num = Number(num);
+	num = Math.floor(num);
+	main(num);
+	
+}
+function fullReset(){
+    window.ballSpeed = 3;
+    window.ballDirection = 0;
+    window.p1Speed = 0;
+    window.p2Speed = 0;
+	
+    window.upHeld = false;
+    window.downHeld = false;
+    window.wHeld = false;
+    window.sHeld = false;
+    resetGame();
+    document.querySelector(".leftScore").textContent = "0";
+	document.querySelector(".rightScore").textContent = "0";
+}
 function main(startTime){
-    var startTime = 10000;
+
+	console.log(startTime);
     var y = 120;
-    setTimer(startTime*y);
-    for(var i=0; i<startTime; i++){
+    setTimer(Math.floor(startTime+((Math.floor(startTime/(startTime/1000*y))-startTime/(startTime/1000*y))*startTime/1000*y)));
+    for(var i=0; i<startTime/1000*y; i++){
         // let c = function(i){running(i)}
-        setTimeout(running, i*1000/y);
+        setTimeout(running, i*(startTime/(y*startTime/1000)));
     }
     let c = function(decreaseRate){return function(){changeTime(decreaseRate)};}
-    console.log(c);
-    let x = c(y);
-    console.log(x);
-        for (i=0; i<startTime; i++){
-        
-    setTimeout(x, i*1000/y);
-    setTimeout(checkDone, i*1000/y)
+    console.log((Math.floor(startTime/(startTime/1000*y))-startTime/(startTime/1000*y))*startTime/1000*y);
+    let x = c(Math.floor(startTime/(startTime/1000*y)));
+    //console.log(x);
+    for (var i=0; i<(startTime/1000*y); i++){
+		setTimeout(x, i*(startTime/(y*startTime/1000)));
+		setTimeout(checkDone, i*(startTime/(y*startTime/1000)));
     }
 }
 function running(){
     // // console.log(i);
-    // changeTime(i);
+	console.log("here now");
     moveBall(window.ballSpeed, window.ballDirection);
     paddleSpeedChanger();
     movePaddles();
@@ -278,17 +361,7 @@ function running(){
     // console.log(window.wHeld);
     // console.log(window.sHeld);
 }
-var ballSpeed = 3;
-var ballDirection = 0;
-var p1Speed = 0;
-var p2Speed = 0;
-var paddleStart = window.getComputedStyle(document.querySelector(".paddle")).top;
-var ballStartTop = window.getComputedStyle(document.querySelector(".ball")).top;
-var ballStartLeft = window.getComputedStyle(document.querySelector(".ball")).left;
-var upHeld = false;
-var downHeld = false;
-var wHeld = false;
-var sHeld = false;
+
 
 document.addEventListener('keydown', (event) => {
     var name = event.key;
@@ -322,5 +395,24 @@ document.addEventListener("keyup", (event) => {
         sHeld = false;
     }
 });
+ballSpeed = 3;
+ballDirection = 0;
+p1Speed = 0;
+p2Speed = 0;
+paddleStart = window.getComputedStyle(document.querySelector(".paddle")).top;
+ballStartTop = window.getComputedStyle(document.querySelector(".ball")).top;
+ballStartLeft = window.getComputedStyle(document.querySelector(".ball")).left;
+audio = playSound();
+
+upHeld = false;
+downHeld = false;
+wHeld = false;
+sHeld = false;
+
+
 intPaddles();
-main(10000);
+document.querySelector(".form").addEventListener("submit", (e)=>{
+    e.preventDefault();
+	fullReset();
+	setup();
+})

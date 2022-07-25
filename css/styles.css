@@ -1,5 +1,5 @@
 body{
-    background-color: turquoise;
+    background-color: DarkSeaGreen;
     color: black;
 }
 .topSection{
@@ -24,6 +24,10 @@ body{
     height: 500px;
     background-color: black;
 }
+.winner{
+	text-align:center
+	
+}
 .paddle{
     width: 40px;
     height: 160px;
@@ -41,6 +45,8 @@ body{
 #rightPaddle{
     left: 95%;
 }
+#leftPaddle{
+}
 .ball{
     width: 30px;
     height: 30px;
@@ -49,4 +55,12 @@ body{
     background-color: white;
     left: 50%;
     top: 50%;
+}
+td{
+	padding:4px;
+}
+.settingsArea{
+	display:inline-block;
+	width:85%;
+	
 }
