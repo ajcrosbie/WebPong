@@ -4,37 +4,45 @@
         <meta charset="utf-8">
         <link rel="icon" href="favicon.ico">
         <link rel="stylesheet" href="css/styles.css">
-        <title>pong</title>
+		<script src="index.js" defer></script> <!-- does not need to be linked at end of page because it loads after -->
+        <title>pong</title> <!-- brings in the different links and sets title -->
     </head>
     <body>
+		<div class="links">
+			<a href="../index.html">Main Page</a>
+			<a href="../tajMahal.html">Taj Mahal</a>
+			<a href="../greatWall.html">Great Wall</a>
+			<a href="../colosseum.html">Colosseum</a>
+			<a href="index.html">Game</a>
+		</div>
         <div class="topSection">
-        <div class="leftPerson">
-            <div class="leftText"><span>player 1 has scored</span></div>
-            <div class="leftScore"><span>0</span></div>
-        </div>
-        <div class="rightPerson">
-            <div class="rightText"><span>player 2 has scored</span></div>
-            <div class="rightScore"><span>0</span></div>
-        </div>
-        <div class="timeSection">
-            <span class="timer"></span>
-        </div>
-		<div class="winner"><span></span></div>
+			<div class="leftPerson">
+				<div class="leftText"><span>player 1 has scored</span></div>
+				<div class="leftScore"><span>0</span></div>
+			</div>
+			<div class="rightPerson">
+				<div class="rightText"><span>player 2 has scored</span></div>
+				<div class="rightScore"><span>0</span></div>
+			</div> <!-- creates score keeping area -->
+			<div class="timeSection">
+				<span class="timer"></span>
+			</div>
+			<div class="winner"><span></span></div>
         </div>
 
-        <div class="gameArea">
+        <div class="gameArea"> <!-- makes a box for the game to be played in and boxes for the game objects-->
             <div class="paddle" id="leftPaddle"></div>
             <div class="paddle" id="rightPaddle"></div>
             <div class="ball"></div>
         </div>
 
         <br>
-		<div class="settingsArea">
+		<div class="settingsArea"> <!-- makes a table to organise the player choice area-->
 			<form class="form">
 				<table>
 					<tr>
 						<td><span>player 1's name</span></td>
-						<td><input type="text" class="p1Name"/></td>
+						<td><input type="text" class="p1Name" required /></td>
 						<td><span>player1's paddle colour:</span></td>
 						<td> <span style="color:Crimson">red</span></td>
 						<td><input type="radio" name="p1Colour" value="red" class="p1Colour"></td>
@@ -49,7 +57,7 @@
 					</tr>
 					<tr class="player2Data">
 						<td><span>player 2's name</span></td>
-						<td><input type="text" class="p2Name"/></td>
+						<td><input type="text" class="p2Name" required /></td>
 						<td><span>player2's paddle colour:</span></td>
 						<td> <span style="color:Crimson">red</span></td>
 						<td><input type="radio" name="p2Colour" value="red" class="p2Colour"></td>
@@ -64,13 +72,14 @@
 					</tr>
 					<tr>
 						<td><span>how many seconds?</span></td>
-						<td><input type="number" min="0" step="1" class="time"/></td>
+						<td><input type="number" min="0" step="1" class="time" required /></td>
+						<td><span>may take a while to load</span></td>
 					</tr>
 				</table>
-			<input type="submit">
+			<input type="submit" value="start new game">
 			</form>
 		</div>
         <!-- <img src="https://i.imgur.com/UYJIm2E.jpg"> -->
-        <script src="index.js"></script>
+
     </body>
 </html>

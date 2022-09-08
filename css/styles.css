@@ -1,9 +1,31 @@
+/* for consistancy with the other parts */
 body{
-    background-color: DarkSeaGreen;
+    background-color: seaGreen;
     color: black;
 }
+.links{
+	z-index:1;
+	position:sticky;
+	background-color:gray;
+	width:100%;
+	height:48px;
+	top:0px;
+	left:0px;
+}
+.links a{
+	text-align:centre;
+	float:left;
+	display:block;
+	padding:14px ;
+	color:black;
+	border-bottom: 3px solid transparent;
+}
+.links a:hover {
+  border-bottom: 3px solid blue;
+}/* this bit is for show*/
 .topSection{
     height: 100px;
+	padding:10px;
 }
 .leftScore{
     text-align: center;
@@ -12,13 +34,14 @@ body{
     text-align: center;
 }
 .leftPerson{
-    display: inline-block;
+	position:absolute;
+	left:10%;
 }
 .rightPerson{
     display: inline-block;
     position: absolute;
     right:10%;
-}
+}/* this isn't perfect because it doesn't like me setting height as a %*/
 .gameArea{
     width: 100%;
     height: 500px;
@@ -58,6 +81,7 @@ body{
 }
 td{
 	padding:4px;
+	text-align:centre;
 }
 .settingsArea{
 	display:inline-block;
